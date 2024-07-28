@@ -1,5 +1,3 @@
-<!-- Code by Brave Coder - https://youtube.com/BraveCoder -->
-
 <?php
 session_start();
 if (isset($_SESSION['SESSION_EMAIL'])) {
@@ -10,13 +8,26 @@ if (isset($_SESSION['SESSION_EMAIL'])) {
 include 'config.php';
 $msg = "";
 
+function validateEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
+function checkEmailDomain($email) {
+    $domain = substr(strrchr($email, "@"), 1);
+    return checkdnsrr($domain, 'MX');
+}
+
 if (isset($_POST['submit'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, md5($_POST['password']));
     $confirm_password = mysqli_real_escape_string($conn, md5($_POST['confirm-password']));
 
-    if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE email='{$email}'")) > 0) {
+    if (!validateEmail($email)) {
+        $msg = "<div class='alert alert-danger'>Invalid email format. Please use a valid email address.</div>";
+    } elseif (!checkEmailDomain($email)) {
+        $msg = "<div class='alert alert-danger'>Invalid email domain. Please use a valid email address.</div>";
+    } elseif (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE email='{$email}'")) > 0) {
         $msg = "<div class='alert alert-danger'>{$email} - This email address already exists.</div>";
     } else {
         if ($password === $confirm_password) {
@@ -85,7 +96,8 @@ if (isset($_POST['submit'])) {
     <script src="js/jquery.min.js"></script>
     <script>
         function redirectToIndex() {
-            window.location.href = "index.php"; }
+            window.location.href = "index.php";
+        }
     </script>
 </body>
 
