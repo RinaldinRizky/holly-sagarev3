@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    <link rel="stylesheet" href="css/verify.css">
+<body>
+    <div class="container" style="text-align: center;">
+        <div class="otp-box">
+            <h2>OTP Verification</h2>
+            <p>Enter the OTP sent to your email address</p>
+            <form action="#" autocomplete="off">
+                <div class="error-text">Error</div>
+                <input type="number" id="otp1" class="otp_field" placeholder="0" min="0" max="9" required onpaste="false">
+                <input type="number" id="otp2" class="otp_field" placeholder="0" min="0" max="9" required onpaste="false">
+                <input type="number" id="otp3" class="otp_field" placeholder="0" min="0" max="9" required onpaste="false">
+                <input type="number" id="otp4" class="otp_field" placeholder="0" min="0" max="9" required onpaste="false">
+            </form>
+            <div class="submit">
+                <input type="submit" value="Verify Now" class="button">
+            </div>
+            <p class="resend">Resend OTP</p>
+        </div>
+    </div>
+
+    <script src="js/verify.js"></script>
+</body>
+</html>
