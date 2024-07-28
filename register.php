@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
     if (!validateEmail($email)) {
         $msg = "<div class='alert alert-danger'>Invalid email format. Please use a valid email address.</div>";
     } elseif (!checkEmailDomain($email)) {
-        $msg = "<div class='alert alert-danger'>Invalid email domain. Please use a valid email address.</div>";
+        $msg = "<div class='alert alert-danger'>Invalid email. Please use a valid email address.</div>";
     } elseif (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE email='{$email}'")) > 0) {
         $msg = "<div class='alert alert-danger'>{$email} - This email address already exists.</div>";
     } else {
