@@ -26,8 +26,8 @@ if (!isset($_SESSION['SESSION_EMAIL']) || !isset($_SESSION['SESSION_NAME'])) {
     exit;
 }
 
-$userName = $_SESSION['SESSION_NAME'];
-$userEmail = $_SESSION['SESSION_EMAIL'];
+// $userName = $_SESSION['SESSION_NAME'];
+// $userEmail = $_SESSION['SESSION_EMAIL'];
 
 $params = array(
     'transaction_details' => array(
@@ -36,8 +36,8 @@ $params = array(
     ),
     'item_details' => json_decode($_POST['items'], true),
     'customer_details' => array(
-        'first_name' => $userName,
-        'email' => $userEmail,
+        'first_name' => $_POST['name'],
+        'email' => $_POST['email'],
     ),
 );
 
